@@ -1,0 +1,41 @@
+.boardgame-picker {
+    .header {
+        font-size: 30pt;
+        font-weight: bold;
+        padding: 10px;
+    }
+    .user-control {
+        padding: 5px;
+        display: flex;
+        width: 520px;
+        >* {
+            flex: 1;
+        }
+        >label {
+            flex: 3;
+            text-align: right;
+            padding-right: 5px;
+        }
+        input {
+            width: 100px;
+            background-color: #222222;
+            color: #DDDDDD;
+            text-align: center;
+            border: none;
+            border-bottom: 1px solid gray;
+        }
+        input:focus {
+            outline: none;
+        }
+        button {
+            width: 100px;
+        }
+    }
+    .games-area {
+        display: flex;
+        flex-wrap: wrap;
+        >* {
+            flex: 1;
+        }
+    }
+}

@@ -1,0 +1,32 @@
+{
+  "name": "boardgame-tool",
+  "version": "1.0.0",
+  "description": "Web app for analyzing boardgame data",
+  "main": "web/index.js",
+  "repository": "https://github.com/caesuric/boardgame-tool.git",
+  "author": "caesuric <illusorycaesura@gmail.com>",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "@uirouter/angularjs": "^1.0.14",
+    "angular": "^1.6.9",
+    "angular-ui-bootstrap": "^2.5.6",
+    "angular-ui-router": "^1.0.3",
+    "babel-cli": "^6.26.0",
+    "babel-env": "^2.4.1",
+    "babel-loader": "^7.1.2",
+    "bootstrap": "^4.0.0",
+    "css-loader": "^0.28.9",
+    "file-loader": "^1.1.6",
+    "html-loader": "^0.5.5",
+    "jquery": "^3.3.1",
+    "node-sass": "^4.7.2",
+    "path": "^0.12.7",
+    "sass": "^1.0.0-beta.5.2",
+    "sass-loader": "^6.0.6",
+    "source-map": "^0.7.0",
+    "style-loader": "^0.20.1",
+    "webpack": "^3.10.0",
+    "webpack-build-notifier": "^0.1.22"
+  }
+}

@@ -2,7 +2,7 @@ var path = require('path')
 const webpack = require('webpack')
 var WebpackBuildNotifierPlugin = require('webpack-build-notifier')
 
-modules.exports = {
+module.exports = {
     entry: './src/index.js',
     output: {
         path: path.resolve(__dirname, 'web'),
@@ -55,12 +55,12 @@ modules.exports = {
             path.resolve(__dirname, 'src/scss')
         ]
     },
-    plugins: {
+    plugins: [
         new webpack.ProvidePlugin({
             $: 'jquery',
             jQuery: 'jquery',
             'window.jQuery': 'jquery'
         }),
         new WebpackBuildNotifierPlugin({})
-    }
+    ]
 }

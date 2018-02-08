@@ -1,0 +1,20 @@
+<div class="boardgame-picker">
+    <div class="header">
+        Boardgame Picker
+    </div>
+    <div class="user-control">
+        <label>How many players?</label>
+        <input ng-model="$ctrl.numberOfPlayers" type="number"></input>
+    </div>
+    <div class="user-control">
+        <label>How many minutes do you have?</label>
+        <input ng-model="$ctrl.minutesAvailable" type="number"></input>
+    </div>
+    <div class="user-control">
+        <label></label>
+        <button class="btn btn-primary" ng-click="$ctrl.submit()">Submit</button>
+    </div>
+    <div class="games-area">
+        <boardgame-tile ng-repeat="game in $ctrl.games" model="game"></boardgame-tile>
+    </div>
+</div>

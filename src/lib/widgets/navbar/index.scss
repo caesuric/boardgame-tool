@@ -1,0 +1,22 @@
+.navbar {
+    display: block;
+    background-color: gray;
+    padding: 5px;
+    a {
+        padding: 10px;
+        text-align: center;
+        vertical-align: middle;
+        line-height: 30px;
+        height: 30px;
+        width: 50px;
+        text-decoration: none;
+        color: black;
+        transition: 0.5s all;
+    }
+    a.selected {
+        background-color: lightgreen;
+    }
+    a:hover {
+        background-color: lightblue;
+    }
+}
