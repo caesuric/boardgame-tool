@@ -1,1 +1,2 @@
+--allow-all-external
 tornado==4.5.3
