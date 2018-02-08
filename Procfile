@@ -1,1 +1,1 @@
-web: python server/boardgame-tool.py --port=$PORT
+web: cd server && python boardgame-tool.py --port=$PORT
