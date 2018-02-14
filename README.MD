@@ -20,6 +20,20 @@ Eventually I also have interest in producing an explorable ontology using simila
 7. To start the server, navigate to the 'server' directory and run `python boardgame-tool.py`
 8. In a web browser, go to http://127.0.0.1:8080/
 
+## Current Features
+
+### Picker
+
+Use this to determine the highest-rated boardgames for a given number of people and maximum playtime.
+
+### Explorer
+
+Attempts to algorithmically guess what kinds of games you might like, and provide a sample of games that rate well according to your choices.
+
+Currently, the user is presented with five screens of 10 games. Each time, they select a game they'd prefer to advance. At the end, the tags associated with each game they selected are assembled and given scores based on how often they appeared in the choices. Finally, a score is assigned to every game in the dataset based on this new rating system, and a selection of ten games that the user might theoretically like is presented.
+
+This obviously needs work, and five data points isn't enough for a good evaluation, but this is just a rough concept at the moment. Very much a WIP.
+
 ## Code Guide
 
 /server/ - the Python backend server and processing features live here
