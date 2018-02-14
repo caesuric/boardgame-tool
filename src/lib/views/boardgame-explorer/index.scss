@@ -19,4 +19,20 @@
     .boardgame-tile {
         cursor: pointer;
     }
+    .why {
+        width: 70%;
+        .row {
+            display: flex;
+            >* {
+                flex: 1;
+            }
+            .label {
+                text-align: right;
+                padding-right: 10px;
+            }
+            .data {
+                text-align: left;
+            }
+        }
+    }
 }

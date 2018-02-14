@@ -31,6 +31,7 @@ export var commHandler = {
     processMessage: function(message) {
         if (message.message=='gameList') {
             commHandler.context.games = message.games
+            if (message.why) commHandler.context.why = message.why
             commHandler.scope.$apply()
         }
     }

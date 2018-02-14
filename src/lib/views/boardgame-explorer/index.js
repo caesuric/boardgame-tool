@@ -5,6 +5,7 @@ var template = require('./index.html')
 function explorerController($scope, $element, $state) {
     var ctrl = this
     ctrl.$onInit = function() {
+        ctrl.mode = 'picker'
         ctrl.message = 'Which game sounds most appealing right now?'
         ctrl.gamesSelected = []
         commHandler.context = ctrl
@@ -21,6 +22,7 @@ function explorerController($scope, $element, $state) {
         }, 400)
     }
     ctrl.selectGame = function(game) {
+        if (ctrl.mode!='picker') return
         ctrl.gamesSelected.push(game)
         if (ctrl.gamesSelected.length<5) {
             var message = {
@@ -29,7 +31,9 @@ function explorerController($scope, $element, $state) {
             commHandler.sendMessage(message)
         }
         else {
+            ctrl.mode = 'results'
             ctrl.message = 'Here are your recommendations!'
+            console.log(ctrl)
             var message = {
                 message: 'calculateBestGames',
                 games: ctrl.getGameIds(ctrl.gamesSelected)

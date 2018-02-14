@@ -26,9 +26,15 @@
         </div>
         <div class="row">
             <div class="label">
-                Rank:
+                BGG Rank:
             </div>
             <div class="data" ng-bind="$ctrl.model.rank"></div>
+        </div>
+        <div class="row" ng-if="$ctrl.model.algorithmScore">
+            <div class="label">
+                Algorithm Score:
+            </div>
+            <div class="data" ng-bind="$ctrl.model.algorithmScore"></div>
         </div>
     </div>
 </div>

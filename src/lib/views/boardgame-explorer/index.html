@@ -6,4 +6,19 @@
     <div class="games-area">
         <boardgame-tile-nonlink ng-repeat="game in $ctrl.games" ng-click="$ctrl.selectGame(game)" model="game"></boardgame-tile>
     </div>
+    <div class="why" ng-if="$ctrl.why">
+        <div class="subheader">
+            Algorithm Reasoning:
+        </div>
+        <div ng-repeat="reason in $ctrl.why">
+            <div class="row" ng-style="{'font-size': (8*reason[1])+'pt'}">
+                <div class="label">
+                    <span ng-bind="reason[0]"></span>:
+                </div>
+                <div class="data">
+                    <span ng-bind="reason[1]"></span> pts
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

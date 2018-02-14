@@ -25,7 +25,7 @@ class SocketHandler(tornado.websocket.WebSocketHandler):
         for i in range(int(len(data.DataHandler.data)/10)):
             entries.append(data.DataHandler.data[i])
         entries2 = []
-        while len(entries2)<5:
+        while len(entries2)<10:
             choice = random.choice(entries)
             if choice not in entries2:
                 entries2.append(choice)
@@ -35,23 +35,32 @@ class SocketHandler(tornado.websocket.WebSocketHandler):
         data.DataHandler.data.sort(key=lambda x : x.rank)
         for entry in data.DataHandler.data:
             entry.value = 0
-        selected_mechanics = {}
+        selected_tags = {}
         for entry in self.find_games(message['games']):
+            composite_list = []
             for mechanic in entry.mechanics:
-                if mechanic in selected_mechanics:
-                    selected_mechanics[mechanic] += 1
+                composite_list.append(mechanic)
+            for category in entry.categories:
+                composite_list.append(category)
+            for designer in entry.designers:
+                composite_list.append(designer)
+            for tag in composite_list:
+                if tag in selected_tags:
+                    selected_tags[tag] += 1
                 else:
-                    selected_mechanics[mechanic] = 1
+                    selected_tags[tag] = 1
         for entry in data.DataHandler.data:
-            for mechanic in selected_mechanics:
-                if mechanic in entry.mechanics:
-                    entry.value += selected_mechanics[mechanic]
+            for tag in selected_tags:
+                if tag in entry.mechanics or tag in entry.categories or tag in entry.designers:
+                    entry.value += selected_tags[tag]
         data.DataHandler.data.sort(key=lambda x : x.value, reverse=True)
         result = []
         for i in range(10):
             result.append(data.DataHandler.data[i])
-        games = [{'name': x.name, 'bggUrl': x.bgg_url, 'rank': x.rank, 'minPlayers': x.min_players, 'maxPlayers': x.max_players, 'minTime': x.min_time, 'maxTime': x.max_time, 'imageUrl': x.image_url, 'id': x.id} for x in result]
-        self.attempt_to_write_message({'message': 'gameList', 'games': games})
+        games = [{'name': x.name, 'bggUrl': x.bgg_url, 'rank': x.rank, 'minPlayers': x.min_players, 'maxPlayers': x.max_players, 'minTime': x.min_time, 'maxTime': x.max_time, 'imageUrl': x.image_url, 'id': x.id, 'algorithmScore': x.value} for x in result]
+        why = sorted(selected_tags.iteritems(), key=lambda (k,v): (v,k))
+        why.reverse()
+        self.attempt_to_write_message({'message': 'gameList', 'games': games, 'why': why})
     def find_games(self, ids):
         result = []
         for id_num in ids:
