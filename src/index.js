@@ -1,5 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.css'
 import angular from 'angular'
+import ngAnimate from 'angular-animate'
 import 'angular-ui-router'
 import 'angular-ui-bootstrap'
 
@@ -7,7 +8,7 @@ import 'widgets'
 import 'views'
 import './index.scss'
 
-var app = angular.module('boardgameTool', ['ui.bootstrap', 'ui.router', 'widgets', 'views'])
+var app = angular.module('boardgameTool', ['ngAnimate', 'ui.bootstrap', 'ui.router', 'widgets', 'views'])
 app.config(function($stateProvider, $urlRouterProvider) {
     $stateProvider.state({
         name: 'picker',

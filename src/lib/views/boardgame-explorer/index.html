@@ -1,0 +1,9 @@
+<div class="boardgame-explorer fadeable">
+    <div class="header">
+        Boardgame Explorer
+    </div>
+    <div class="subheader" ng-bind="$ctrl.message"></div>
+    <div class="games-area">
+        <boardgame-tile-nonlink ng-repeat="game in $ctrl.games" ng-click="$ctrl.selectGame(game)" model="game"></boardgame-tile>
+    </div>
+</div>

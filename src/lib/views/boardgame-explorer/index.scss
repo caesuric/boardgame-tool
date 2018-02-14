@@ -1,0 +1,22 @@
+.boardgame-explorer {
+    .header {
+        font-size: 30pt;
+        font-weight: bold;
+        padding: 10px;
+    }
+    .subheader {
+        font-size: 20pt;
+        font-weight: bold;
+        padding: 10px;
+    }
+    .games-area {
+        display: flex;
+        flex-wrap: wrap;
+        >* {
+            flex: 1;
+        }
+    }
+    .boardgame-tile {
+        cursor: pointer;
+    }
+}

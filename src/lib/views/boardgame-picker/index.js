@@ -8,6 +8,9 @@ function pickerController($scope, $element, $state) {
         commHandler.context = ctrl
         commHandler.scope = $scope
         if (!commHandler.socket) commHandler.start()
+        setTimeout(function() {
+            $($element[0].firstChild).addClass('fadein')
+        }, 10)
     }
     ctrl.submit = function() {
         var message = {

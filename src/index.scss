@@ -12,3 +12,16 @@ body {
     -ms-user-select: none; /* Internet Explorer/Edge */
     font-family: 'Rubik', sans-serif;
 }
+
+a:hover {
+    text-decoration: none;
+}
+
+.fadeable {
+    transition: opacity 0.5s;
+    opacity: 0;
+}
+
+.fadein {
+    opacity: 1;
+}
