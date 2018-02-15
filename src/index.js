@@ -17,8 +17,13 @@ app.config(function($stateProvider, $urlRouterProvider) {
     })
     $stateProvider.state({
         name: 'explorer',
-        url: '/explorer',
+        url: '/explorer/{tableName:string}',
         template: '<boardgame-explorer></boardgame-explorer>'
+    })
+    $stateProvider.state({
+        name: 'explorerSetup',
+        url: '/explorerSetup',
+        template: '<boardgame-explorer-setup></boardgame-explorer-setup>'
     })
     $urlRouterProvider.otherwise('/picker')
 })

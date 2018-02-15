@@ -1,0 +1,10 @@
+<div class="boardgame-explorer-setup fadeable">
+    <div class="header">
+        Boardgame Explorer - Setup
+    </div>
+    <div>
+        Enter your name to proceed:
+        <input ng-model="$ctrl.name"></input>
+    </div>
+    <button class="btn btn-primary" ng-click="$ctrl.submit()" ng-disabled="!$ctrl.name">Submit</button>
+</div>

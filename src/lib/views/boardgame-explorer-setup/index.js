@@ -2,7 +2,7 @@ import {commHandler} from 'network'
 import './index.scss'
 var template = require('./index.html')
 
-function pickerController($scope, $element, $state, $stateParams) {
+function explorerSetupController($scope, $element, $state) {
     var ctrl = this
     ctrl.$onInit = function() {
         commHandler.context = ctrl
@@ -14,17 +14,22 @@ function pickerController($scope, $element, $state, $stateParams) {
     }
     ctrl.submit = function() {
         var message = {
-            message: 'queryGames',
-            players: ctrl.numberOfPlayers,
-            minutes: ctrl.minutesAvailable
+            message: 'createExplorerTable'
         }
         commHandler.sendMessage(message)
     }
+    ctrl.moveToTable = function(tableName) {
+        $($element[0].firstChild).removeClass('fadein')
+        $($element[0].firstChild).addClass('fadeout')
+        setTimeout(function() {
+            $state.go('explorer', {tableName: tableName})
+        }, 500)
+    }
 }
 
-angular.module('widgets').component('boardgamePicker', {
+angular.module('widgets').component('boardgameExplorerSetup', {
     template: template,
-    controller: pickerController,
+    controller: explorerSetupController,
     bindings: {
         model: '='
     }

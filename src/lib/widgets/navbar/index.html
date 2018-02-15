@@ -1,4 +1,4 @@
 <div class="navbar">
     <a ui-sref="picker" ng-class="{'selected': $ctrl.isSelected('picker')}">Picker</a>
-    <a ui-sref="explorer" ng-class="{'selected': $ctrl.isSelected('explorer')}">Explorer</a>
+    <a ui-sref="explorerSetup" ng-class="{'selected': $ctrl.isSelected('explorerSetup') || $ctrl.isSelected('explorer')}">Explorer</a>
 </div>

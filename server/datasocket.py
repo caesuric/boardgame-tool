@@ -75,7 +75,7 @@ class SocketHandler(tornado.websocket.WebSocketHandler):
                     break
         return result
     def create_explorer_table(self, message):
-        new_table = {'name': uuid.uuid4()[0:4], 'people': []}
+        new_table = {'name': str(uuid.uuid4())[0:4], 'people': []}
         new_table['people'].append(self)
         SocketHandler.tables.append(new_table)
         self.attempt_to_write_message({'message': 'newTable', 'tableName': new_table['name']})
