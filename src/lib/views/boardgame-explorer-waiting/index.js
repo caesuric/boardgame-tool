@@ -5,6 +5,7 @@ var template = require('./index.html')
 function explorerWaitingController($scope, $element, $state, $stateParams) {
     var ctrl = this
     ctrl.$onInit = function() {
+        ctrl.url = window.location.href
         commHandler.context = ctrl
         commHandler.scope = $scope
         if (!commHandler.socket) commHandler.start()
@@ -18,6 +19,9 @@ function explorerWaitingController($scope, $element, $state, $stateParams) {
             }
             commHandler.sendMessage(message)
         }, 500)
+    }
+    ctrl.keepUrlCorrect = function() {
+        ctrl.url = window.location.href
     }
     ctrl.joinTable = function(name) {
         var message = {

@@ -70878,6 +70878,7 @@ var template = __webpack_require__(237);
 function explorerWaitingController($scope, $element, $state, $stateParams) {
     var ctrl = this;
     ctrl.$onInit = function () {
+        ctrl.url = window.location.href;
         _network.commHandler.context = ctrl;
         _network.commHandler.scope = $scope;
         if (!_network.commHandler.socket) _network.commHandler.start();
@@ -70891,6 +70892,9 @@ function explorerWaitingController($scope, $element, $state, $stateParams) {
             };
             _network.commHandler.sendMessage(message);
         }, 500);
+    };
+    ctrl.keepUrlCorrect = function () {
+        ctrl.url = window.location.href;
     };
     ctrl.joinTable = function (name) {
         var message = {
@@ -70984,7 +70988,7 @@ exports = module.exports = __webpack_require__(11)(false);
 
 
 // module
-exports.push([module.i, ".boardgame-explorer-waiting .header {\n  font-size: 30pt;\n  font-weight: bold;\n  padding: 10px; }\n\n.boardgame-explorer-waiting .subheader {\n  font-size: 20pt;\n  font-weight: bold;\n  padding: 10px; }\n\n.boardgame-explorer-waiting .people-area {\n  margin-left: 15px; }\n\n.boardgame-explorer-waiting .you {\n  font-weight: bold; }\n\n.boardgame-explorer-waiting input[type='checkbox'] {\n  width: 25px;\n  height: 25px; }\n", ""]);
+exports.push([module.i, ".boardgame-explorer-waiting .header {\n  font-size: 30pt;\n  font-weight: bold;\n  padding: 10px; }\n\n.boardgame-explorer-waiting .subheader {\n  font-size: 20pt;\n  font-weight: bold;\n  padding: 10px; }\n\n.boardgame-explorer-waiting .margin-left {\n  margin-left: 15px; }\n\n.boardgame-explorer-waiting .you {\n  font-weight: bold; }\n\n.boardgame-explorer-waiting input[type='checkbox'] {\n  width: 25px;\n  height: 25px; }\n\n.boardgame-explorer-waiting .big-input {\n  width: 400px; }\n", ""]);
 
 // exports
 
@@ -70993,7 +70997,7 @@ exports.push([module.i, ".boardgame-explorer-waiting .header {\n  font-size: 30p
 /* 237 */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"boardgame-explorer-waiting fadeable\">\r\n    <div class=\"header\">\r\n        Boardgame Explorer - Waiting Room\r\n    </div>\r\n    <div class=\"subheader\">\r\n        Players so far:\r\n    </div>\r\n    <div class=\"people-area\">\r\n        <div ng-repeat=\"person in $ctrl.players\">\r\n            <span ng-bind=\"person.name\" ng-class=\"{'you': person.name==$ctrl.you}\"></span>\r\n            <span ng-if=\"person.name==$ctrl.you\">\r\n                (You)\r\n            </span>\r\n        </div>\r\n        <div ng-if=\"!$ctrl.you\">\r\n            <div>\r\n                Enter your name to join:\r\n                <input ng-model=\"$ctrl.name\"></input>\r\n            </div>\r\n            <button class=\"btn btn-primary\" ng-click=\"$ctrl.joinTable($ctrl.name)\">Join</button>\r\n        </div>\r\n        <div ng-if=\"$ctrl.you\">\r\n            Ready?\r\n            <input type=\"checkbox\" ng-model=\"$ctrl.ready\" ng-change=\"$ctrl.changedReadyState($ctrl.ready)\"></input>\r\n        </div>\r\n    </div>\r\n</div>\r\n";
+module.exports = "<div class=\"boardgame-explorer-waiting fadeable\">\r\n    <div class=\"header\">\r\n        Boardgame Explorer - Waiting Room\r\n    </div>\r\n    <div class=\"subheader\">\r\n        Copy this url and paste it to the rest of your table:\r\n    </div>\r\n    <input class=\"margin-left big-input\" ng-model=\"$ctrl.url\" ng-change=\"$ctrl.keepUrlCorrect()\"></input>\r\n    <div class=\"subheader\">\r\n        Players so far:\r\n    </div>\r\n    <div class=\"margin-left\">\r\n        <div ng-repeat=\"person in $ctrl.players\">\r\n            <span ng-bind=\"person.name\" ng-class=\"{'you': person.name==$ctrl.you}\"></span>\r\n            <span ng-if=\"person.name==$ctrl.you\">\r\n                (You)\r\n            </span>\r\n        </div>\r\n        <div ng-if=\"!$ctrl.you\">\r\n            <div>\r\n                Enter your name to join:\r\n                <input ng-model=\"$ctrl.name\"></input>\r\n            </div>\r\n            <button class=\"btn btn-primary\" ng-click=\"$ctrl.joinTable($ctrl.name)\">Join</button>\r\n        </div>\r\n        <div ng-if=\"$ctrl.you\">\r\n            Ready?\r\n            <input type=\"checkbox\" ng-model=\"$ctrl.ready\" ng-change=\"$ctrl.changedReadyState($ctrl.ready)\"></input>\r\n        </div>\r\n    </div>\r\n</div>\r\n";
 
 /***/ })
 /******/ ]);
