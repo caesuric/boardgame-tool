@@ -1,12 +1,15 @@
 import tornado.websocket
 import tornado.escape
 import random
+import uuid
 
 import data
 
 class SocketHandler(tornado.websocket.WebSocketHandler):
+    clients = []
+    tables = []
     def open(self):
-        pass
+        SocketHandler.clients.append(self)
     def on_message(self,message):
         parsed = tornado.escape.json_decode(message)
         if parsed['message']=='queryGames':
@@ -15,6 +18,8 @@ class SocketHandler(tornado.websocket.WebSocketHandler):
             self.query_game_sample(parsed)
         elif parsed['message']=='calculateBestGames':
             self.calculate_best_games(parsed)
+        elif parsed['message']=='createExplorerTable':
+            self.create_explorer_table(parsed)
     def query_games(self, message):
         data.DataHandler.data.sort(key=lambda x : x.rank)
         games = [{'name': x.name, 'bggUrl': x.bgg_url, 'rank': x.rank, 'minPlayers': x.min_players, 'maxPlayers': x.max_players, 'minTime': x.min_time, 'maxTime': x.max_time, 'imageUrl': x.image_url, 'id': x.id} for x in data.DataHandler.data if x.min_players<int(message['players']) and x.max_players>int(message['players']) and x.max_time<=int( message['minutes'])]
@@ -69,6 +74,11 @@ class SocketHandler(tornado.websocket.WebSocketHandler):
                     result.append(entry)
                     break
         return result
+    def create_explorer_table(self, message):
+        new_table = {'name': uuid.uuid4()[0:4], 'people': []}
+        new_table['people'].append(self)
+        SocketHandler.tables.append(new_table)
+        self.attempt_to_write_message({'message': 'newTable', 'tableName': new_table['name']})
     def attempt_to_write_message(self, message):
         try:
             self.write_message(message)
