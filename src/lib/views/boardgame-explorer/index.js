@@ -32,10 +32,9 @@ function explorerController($scope, $element, $state) {
         }
         else {
             ctrl.mode = 'results'
-            ctrl.message = 'Here are your recommendations!'
-            console.log(ctrl)
+            ctrl.message = 'Waiting on other players to finish...'
             var message = {
-                message: 'calculateBestGames',
+                message: 'sendInBestGames',
                 games: ctrl.getGameIds(ctrl.gamesSelected)
             }
             commHandler.sendMessage(message)

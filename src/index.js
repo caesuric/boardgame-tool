@@ -25,6 +25,11 @@ app.config(function($stateProvider, $urlRouterProvider) {
         url: '/explorerSetup',
         template: '<boardgame-explorer-setup></boardgame-explorer-setup>'
     })
+    $stateProvider.state({
+        name: 'explorerWaiting',
+        url: '/explorerWaiting/{tableName:string}',
+        template: '<boardgame-explorer-waiting></boardgame-explorer-waiting>'
+    })
     $urlRouterProvider.otherwise('/picker')
 })
 .controller('mainCtrl', function($scope) {

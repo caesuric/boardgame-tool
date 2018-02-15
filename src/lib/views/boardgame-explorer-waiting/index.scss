@@ -1,0 +1,22 @@
+.boardgame-explorer-waiting {
+    .header {
+        font-size: 30pt;
+        font-weight: bold;
+        padding: 10px;
+    }
+    .subheader {
+        font-size: 20pt;
+        font-weight: bold;
+        padding: 10px;
+    }
+    .people-area {
+        margin-left: 15px;
+    }
+    .you {
+        font-weight: bold;
+    }
+    input[type='checkbox'] {
+        width: 25px;
+        height: 25px;
+    }
+}

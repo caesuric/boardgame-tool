@@ -1,0 +1,27 @@
+<div class="boardgame-explorer-waiting fadeable">
+    <div class="header">
+        Boardgame Explorer - Waiting Room
+    </div>
+    <div class="subheader">
+        Players so far:
+    </div>
+    <div class="people-area">
+        <div ng-repeat="person in $ctrl.players">
+            <span ng-bind="person.name" ng-class="{'you': person.name==$ctrl.you}"></span>
+            <span ng-if="person.name==$ctrl.you">
+                (You)
+            </span>
+        </div>
+        <div ng-if="!$ctrl.you">
+            <div>
+                Enter your name to join:
+                <input ng-model="$ctrl.name"></input>
+            </div>
+            <button class="btn btn-primary" ng-click="$ctrl.joinTable($ctrl.name)">Join</button>
+        </div>
+        <div ng-if="$ctrl.you">
+            Ready?
+            <input type="checkbox" ng-model="$ctrl.ready" ng-change="$ctrl.changedReadyState($ctrl.ready)"></input>
+        </div>
+    </div>
+</div>

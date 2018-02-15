@@ -31,9 +31,18 @@ export var commHandler = {
     processMessage: function(message) {
         if (message.message=='gameList') {
             commHandler.context.games = message.games
-            if (message.why) commHandler.context.why = message.why
+            if (message.why) {
+                commHandler.context.why = message.why
+                commHandler.context.message = 'Here are your table\'s recommendations:'
+            }
             commHandler.scope.$apply()
         }
         else if (message.message=='newTable') commHandler.context.moveToTable(message.tableName)
+        else if (message.message=='tableInfo') {
+            commHandler.context.players = message.players
+            commHandler.context.you = message.you
+            commHandler.scope.$apply()
+        }
+        else if (message.message=='tableReady') commHandler.context.tableReady()
     }
 }

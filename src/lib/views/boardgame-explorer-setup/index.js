@@ -14,7 +14,8 @@ function explorerSetupController($scope, $element, $state) {
     }
     ctrl.submit = function() {
         var message = {
-            message: 'createExplorerTable'
+            message: 'createExplorerTable',
+            name: ctrl.name
         }
         commHandler.sendMessage(message)
     }
@@ -22,7 +23,7 @@ function explorerSetupController($scope, $element, $state) {
         $($element[0].firstChild).removeClass('fadein')
         $($element[0].firstChild).addClass('fadeout')
         setTimeout(function() {
-            $state.go('explorer', {tableName: tableName})
+            $state.go('explorerWaiting', {tableName: tableName})
         }, 500)
     }
 }
