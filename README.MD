@@ -28,11 +28,11 @@ Use this to determine the highest-rated boardgames for a given number of people 
 
 ### Explorer
 
-Attempts to algorithmically guess what kinds of games you might like, and provide a sample of games that rate well according to your choices.
+Attempts to algorithmically guess what kinds of games a table of people might like, and provide a sample of games that rate well according to their choices.
 
-Currently, the user is presented with five screens of 10 games. Each time, they select a game they'd prefer to advance. At the end, the tags associated with each game they selected are assembled and given scores based on how often they appeared in the choices. Finally, a score is assigned to every game in the dataset based on this new rating system, and a selection of ten games that the user might theoretically like is presented.
+Each user is presented with five screens of 10 games each. Each time, they select a game they'd prefer to play. At the end, the tags associated with each game everyone selected are assembled and given scores based on how often they appeared in the choices. Finally, a score is assigned to every game in the dataset based on this new rating system, and a selection of ten games that the table might theoretically like is presented.
 
-This obviously needs work, and five data points isn't enough for a good evaluation, but this is just a rough concept at the moment. Very much a WIP.
+This is a WIP.
 
 ## Code Guide
 
