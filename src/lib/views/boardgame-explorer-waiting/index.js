@@ -5,7 +5,11 @@ var template = require('./index.html')
 function explorerWaitingController($scope, $element, $state, $stateParams) {
     var ctrl = this
     ctrl.$onInit = function() {
-        ctrl.url = window.location.href
+        ctrl.scope = $scope
+        setTimeout(function() {
+            ctrl.url = window.location.href
+            ctrl.scope.$apply()
+        }, 100)
         commHandler.context = ctrl
         commHandler.scope = $scope
         if (!commHandler.socket) commHandler.start()

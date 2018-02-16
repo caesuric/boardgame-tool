@@ -6,5 +6,9 @@
         Enter your name to proceed:
         <input ng-model="$ctrl.name"></input>
     </div>
-    <button class="btn btn-primary" ng-click="$ctrl.submit()" ng-disabled="!$ctrl.name">Submit</button>
+    <div>
+        How many minutes do you have available?
+        <input type="number" ng-model="$ctrl.minutes"></input>
+    </div>
+    <button class="btn btn-primary" ng-click="$ctrl.submit()" ng-disabled="!$ctrl.name || !$ctrl.minutes">Submit</button>
 </div>

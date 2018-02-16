@@ -46,11 +46,13 @@ class SocketHandler(tornado.websocket.WebSocketHandler):
         entries2 = []
         while len(entries2)<10:
             choice = random.choice(entries)
-            if choice not in entries2:
+            if choice not in entries2 and choice.max_time<=self.table['minutes']:
                 entries2.append(choice)
         games = [{'name': x.name, 'bggUrl': x.bgg_url, 'rank': x.rank, 'minPlayers': x.min_players, 'maxPlayers': x.max_players, 'minTime': x.min_time, 'maxTime': x.max_time, 'imageUrl': x.image_url, 'id': x.id} for x in entries2]
         self.attempt_to_write_message({'message': 'gameList', 'games': games})
     def send_in_best_games(self, message):
+        if not self.player:
+            return
         if self.player['gamesSubmitted']:
             return
         for entry in message['games']:
@@ -59,7 +61,7 @@ class SocketHandler(tornado.websocket.WebSocketHandler):
         if self.check_if_all_games_submitted():
             calculate_best_games(self.table)
     def create_explorer_table(self, message):
-        new_table = {'name': str(uuid.uuid4())[0:4], 'players': [], 'games': []}
+        new_table = {'name': str(uuid.uuid4())[0:4], 'players': [], 'games': [], 'minutes': message['minutes']}
         new_table['players'].append(self.create_player(message['name']))
         SocketHandler.tables[new_table['name']] = new_table
         self.table = new_table
@@ -146,8 +148,11 @@ def calculate_best_games(table):
                 entry.value += selected_tags[tag]
     data.DataHandler.data.sort(key=lambda x : x.value, reverse=True)
     result = []
-    for i in range(10):
-        result.append(data.DataHandler.data[i])
+    i = 0
+    while len(result)<10:
+        if data.DataHandler.data[i].max_time<=table['minutes']:
+            result.append(data.DataHandler.data[i])
+        i += 1
     games = [{'name': x.name, 'bggUrl': x.bgg_url, 'rank': x.rank, 'minPlayers': x.min_players, 'maxPlayers': x.max_players, 'minTime': x.min_time, 'maxTime': x.max_time, 'imageUrl': x.image_url, 'id': x.id, 'algorithmScore': x.value} for x in result]
     why = sorted(selected_tags.iteritems(), key=lambda (k,v): (v,k))
     why.reverse()

@@ -15,7 +15,8 @@ function explorerSetupController($scope, $element, $state) {
     ctrl.submit = function() {
         var message = {
             message: 'createExplorerTable',
-            name: ctrl.name
+            name: ctrl.name,
+            minutes: ctrl.minutes
         }
         commHandler.sendMessage(message)
     }

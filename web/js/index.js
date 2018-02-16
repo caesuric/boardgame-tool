@@ -70706,7 +70706,8 @@ function explorerSetupController($scope, $element, $state) {
     ctrl.submit = function () {
         var message = {
             message: 'createExplorerTable',
-            name: ctrl.name
+            name: ctrl.name,
+            minutes: ctrl.minutes
         };
         _network.commHandler.sendMessage(message);
     };
@@ -70796,7 +70797,7 @@ exports.push([module.i, ".boardgame-explorer-setup .header {\n  font-size: 30pt;
 /* 231 */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"boardgame-explorer-setup fadeable\">\r\n    <div class=\"header\">\r\n        Boardgame Explorer - Setup\r\n    </div>\r\n    <div>\r\n        Enter your name to proceed:\r\n        <input ng-model=\"$ctrl.name\"></input>\r\n    </div>\r\n    <button class=\"btn btn-primary\" ng-click=\"$ctrl.submit()\" ng-disabled=\"!$ctrl.name\">Submit</button>\r\n</div>\r\n";
+module.exports = "<div class=\"boardgame-explorer-setup fadeable\">\r\n    <div class=\"header\">\r\n        Boardgame Explorer - Setup\r\n    </div>\r\n    <div>\r\n        Enter your name to proceed:\r\n        <input ng-model=\"$ctrl.name\"></input>\r\n    </div>\r\n    <div>\r\n        How many minutes do you have available?\r\n        <input type=\"number\" ng-model=\"$ctrl.minutes\"></input>\r\n    </div>\r\n    <button class=\"btn btn-primary\" ng-click=\"$ctrl.submit()\" ng-disabled=\"!$ctrl.name || !$ctrl.minutes\">Submit</button>\r\n</div>\r\n";
 
 /***/ }),
 /* 232 */
@@ -70878,7 +70879,11 @@ var template = __webpack_require__(237);
 function explorerWaitingController($scope, $element, $state, $stateParams) {
     var ctrl = this;
     ctrl.$onInit = function () {
-        ctrl.url = window.location.href;
+        ctrl.scope = $scope;
+        setTimeout(function () {
+            ctrl.url = window.location.href;
+            ctrl.scope.$apply();
+        }, 100);
         _network.commHandler.context = ctrl;
         _network.commHandler.scope = $scope;
         if (!_network.commHandler.socket) _network.commHandler.start();
