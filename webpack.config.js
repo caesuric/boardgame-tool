@@ -16,7 +16,13 @@ module.exports = {
                 loaders: [
                     'style-loader',
                     'css-loader',
-                    'sass-loader'
+                    'sass-loader',
+                    {
+                        loader: 'sass-resources-loader',
+                        options: {
+                            resources: './src/resources.scss'
+                        }
+                    }
                 ]
             },
             {

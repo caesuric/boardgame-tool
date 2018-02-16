@@ -14,14 +14,11 @@ class SocketHandler(tornado.websocket.WebSocketHandler):
         self.table = None
     def on_close(self):
         SocketHandler.clients.remove(self)
-        for table_name in SocketHandler.tables:
-            table = SocketHandler.tables[table_name]
-            for player in table['players']:
-                if self==player['handler']:
-                    table['players'].remove(player)
-                    for player in table['players']:
-                        player['handler'].update_table_players(table)
-                    return
+        self.table['players'].remove(self.player)
+        for player in self.table['players']:
+            player['handler'].update_table_players(self.table)
+        if len(self.table['players'])==0:
+            del SocketHandler.tables[self.table['name']]
     def on_message(self,message):
         parsed = tornado.escape.json_decode(message)
         lookup = {
@@ -46,7 +43,7 @@ class SocketHandler(tornado.websocket.WebSocketHandler):
         entries2 = []
         while len(entries2)<10:
             choice = random.choice(entries)
-            if choice not in entries2 and choice.max_time<=self.table['minutes']:
+            if choice not in entries2 and choice.max_time<=self.table['minutes'] and choice.min_players <= len(self.table['players']) and choice.max_players >= len(self.table['players']):
                 entries2.append(choice)
         games = [{'name': x.name, 'bggUrl': x.bgg_url, 'rank': x.rank, 'minPlayers': x.min_players, 'maxPlayers': x.max_players, 'minTime': x.min_time, 'maxTime': x.max_time, 'imageUrl': x.image_url, 'id': x.id} for x in entries2]
         self.attempt_to_write_message({'message': 'gameList', 'games': games})
@@ -150,7 +147,8 @@ def calculate_best_games(table):
     result = []
     i = 0
     while len(result)<10:
-        if data.DataHandler.data[i].max_time<=table['minutes']:
+        game = data.DataHandler.data[i]
+        if game.max_time<=table['minutes'] and game.min_players <= len(table['players']) and game.max_players >= len(table['players']):
             result.append(data.DataHandler.data[i])
         i += 1
     games = [{'name': x.name, 'bggUrl': x.bgg_url, 'rank': x.rank, 'minPlayers': x.min_players, 'maxPlayers': x.max_players, 'minTime': x.min_time, 'maxTime': x.max_time, 'imageUrl': x.image_url, 'id': x.id, 'algorithmScore': x.value} for x in result]
